@@ -1,4 +1,4 @@
-# Nginx vs Caddy performance benchmark
+# Nginx vs Caddy Performance Benchmark
 
 This benchmark shows the number of processed requests per minute for the Nginx and Caddy web servers.  
 Both web servers are downloaded from official docker images with no additional configuration settings to increase performance.
@@ -18,10 +18,18 @@ Resource limits for containers:
 - Nginx: 10% CPU, 1GB RAM
 - Caddy: 10% CPU, 1GB RAM
 
-Testing was done on a machine:
+Benchmark was done on a machine with configuration:
 - CPU: i9-9900K
 - RAM: 16 GB
 - SSD: Samsung SSD 970 EVO Plus 500GB
+
+## Install
+```
+git clone https://github.com/grn-it/nginx-vs-caddy-performance-benchmark
+cd nginx-vs-caddy-performance-benchmark
+docker-compose build
+docker-compose up
+```
 
 ## Run benchmark
 ```
