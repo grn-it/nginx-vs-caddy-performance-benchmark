@@ -1,0 +1,62 @@
+version: "3.4"
+
+services:
+  symfony:
+    build:
+      context: .
+      target: symfony
+    environment:
+      APP_ENV: prod
+    volumes:
+      - symfony:/srv/app:rw,cached
+      - ./.docker/symfony/src/Controller:/srv/app/src/Controller:rw,cached
+
+  php_fpm:
+    build:
+      context: .
+      target: php_fpm
+    volumes:
+      - symfony:/srv/app:rw,cached
+      - ./.docker/symfony/src/Controller:/srv/app/src/Controller:rw,cached
+    depends_on:
+      - symfony
+
+  nginx:
+    build:
+      context: .
+      target: nginx
+    volumes:
+      - .docker/symfony/public:/srv/app/public:rw,cached
+    deploy:
+      resources:
+        limits:
+          cpus: 0.10
+          memory: 1024M
+    depends_on:
+      - php_fpm
+      
+  caddy:
+    build:
+      context: .
+      target: caddy
+    volumes:
+      - .docker/symfony/public:/srv/app/public:rw,cached
+    deploy:
+      resources:
+        limits:
+          cpus: 0.10
+          memory: 1024M
+    depends_on:
+      - php_fpm
+
+  h2load:
+    build:
+      context: .
+      target: h2load
+    tty: true
+    depends_on:
+      - nginx
+      - caddy
+
+volumes:
+  symfony:

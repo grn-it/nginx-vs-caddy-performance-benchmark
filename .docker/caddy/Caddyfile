@@ -1,0 +1,5 @@
+localhost:80 caddy:80
+
+root * /srv/app/public
+php_fastcgi php_fpm:9000
+file_server
