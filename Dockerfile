@@ -35,8 +35,8 @@ RUN composer create-project "symfony/skeleton" . --stability=stable --prefer-dis
 
 RUN set -eux; \
 	mkdir -p var/cache var/log; \
-	composer install --prefer-dist --no-dev --no-progress --no-scripts --no-interaction; \
     composer require doctrine/annotations; \
+	composer install --prefer-dist --no-dev --no-progress --no-scripts --no-interaction; \
 	composer dump-autoload --classmap-authoritative --no-dev; \
 	composer symfony:dump-env prod; \
 	composer run-script --no-dev post-install-cmd; \
@@ -54,8 +54,6 @@ CMD ["nginx", "-g", "daemon off;"]
 FROM caddy as caddy
 COPY .docker/caddy/Caddyfile /etc/caddy/Caddyfile
 WORKDIR /srv/app/public
-# Caddy does not redirect request to PHP-FPM if there is no arbitrary index.php file in directory
-RUN touch index.php
 CMD ["caddy", "run", "-config", "/etc/caddy/Caddyfile"]
 
 ## h2load

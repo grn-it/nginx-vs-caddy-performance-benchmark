@@ -37,16 +37,16 @@ make -s benchmark
 ```
 ## Results
 ```
-Nginx version: 1.21.4
+Nginx version: 1.21.5
 Caddy version: 2.4.6
 PHP version: 8.1.1
 Symfony version: 6.0.2
 
 Number of requests to static html-file
-Nginx: 33783 per minute
-Caddy: 7804 per minute
+Nginx: 27049 per minute
+Caddy: 5790 per minute
 
 Number of requests to PHP-FPM. Processed by Symfony controller
-Nginx: 3827 per minute
-Caddy: 3324 per minute
+Nginx: 3957 per minute
+Caddy: 3316 per minute
 ```
