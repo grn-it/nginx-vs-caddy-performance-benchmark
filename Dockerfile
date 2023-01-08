@@ -54,7 +54,7 @@ CMD ["nginx", "-g", "daemon off;"]
 FROM caddy as caddy
 COPY .docker/caddy/Caddyfile /etc/caddy/Caddyfile
 WORKDIR /srv/app/public
-CMD ["caddy", "run", "-config", "/etc/caddy/Caddyfile"]
+CMD ["caddy", "run", "--config", "/etc/caddy/Caddyfile"]
 
 ## h2load
 FROM ubuntu as h2load
